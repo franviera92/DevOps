@@ -1,0 +1,10 @@
+ansible2.9.txt
+devops.pem
+devops.ppk
+mainBUENO.tfS
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/plugins/windows_amd64/lock.json
+.terraform/plugins/windows_amd64/terraform-provider-aws_v2.43.0_x4.exe
+main copy.tfs
+devops - copia.pem
