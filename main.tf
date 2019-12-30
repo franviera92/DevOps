@@ -2,8 +2,8 @@
 provider "aws" {
   //version = "~> 2.0"
   region  = "us-east-1"
-  access_key = "AKIA6PWGRWWINURSZQ2D"
-  secret_key = "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"
+  access_key = "AKIA2I4MNFLYSXVIOPVA"
+  secret_key = "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"
 }
 resource "aws_security_group" "public_sg" {
   name = "test_sg"
@@ -30,6 +30,14 @@ resource "aws_instance" "devops" {
   key_name = "devops"
   security_groups = ["${aws_security_group.public_sg.name}"]
   
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_type = "gp2"
+    volume_size = 15
+  }
+  tags = {
+    Name = "devops"
+  }
   connection {
     type = "ssh"
     host= self.public_ip
@@ -38,6 +46,9 @@ resource "aws_instance" "devops" {
     //agent = true
     timeout = "3m"
   }
+  /*provisioner "remote-exec" {
+  inline = ["sudo hostnamectl set-hostname devops.test"]
+  }*/
   provisioner "file" {
     source      = "InstallAnsible.sh"
     destination = "/tmp/InstallAnsible.sh"
@@ -75,7 +86,7 @@ resource "aws_instance" "devops" {
     destination = "/tmp/docker-install.yml"
   }
   provisioner "remote-exec" {
-    inline = ["ansible-playbook -u root --private-key ./devops.pem -i localhost -vvvvv /home/ubuntu/docker/docker-install.yml" ]
+    inline = ["ansible-playbook -u root --private-key ./devops.pem -i localhost -vv /home/ubuntu/docker/docker-install.yml" ]
   }
   
 }

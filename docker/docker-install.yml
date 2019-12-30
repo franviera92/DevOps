@@ -1,16 +1,23 @@
 ---
 - hosts: localhost
   become: true
+  gather_facts: yes
   #vars_files:
   #  - vars/default.yml
 
   tasks:
+    - name: Config Swap
+      shell: |
+          sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048
+          sudo /sbin/mkswap /var/swap.1
+          sudo /sbin/swapon /var/swap.1
+
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
     - name: Install required system packages
       apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools','python-pip']
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools','python-pip','htop']
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -50,6 +57,12 @@
         name: "postgres"
         source: pull
         tag: 9.6
+    
+    - name: Pull hello-world-rest
+      docker_image:
+        name: "thomaspoignant/hello-world-rest-json"
+        source: pull
+        #tag: 9.6
     
     - name: Start postgres
       docker_container:
@@ -123,3 +136,63 @@
             KONG_PROXY_ERROR_LOG: '/dev/stderr'
             KONG_ADMIN_ERROR_LOG: '/dev/stderr'
             KONG_ADMIN_LISTEN: '0.0.0.0:8001, 0.0.0.0:8444 ssl'
+
+    #- name: Sleep 15
+    #  command: sleep 15
+
+    #- name: Config hello-world service
+    #  shell: |
+    #      curl -i -X POST \
+    #        --url http://localhost:8001/services/ \
+    #        --data 'name=helloworld' \
+    #        --data 'url=http://{{ ansible_default_ipv4.address }}:8080'
+
+    #- name: Config hello-world route
+    #  shell: |
+    #      curl -X POST \
+    #        http://localhost:8001/services/helloworld/routes \
+    #         -H 'Content-Type: application/json' \
+    #         -d '{"hosts":["test.helloworld"]}'
+
+    - name: Start hello-world-rest
+      docker_container:
+        name: hello-world-rest
+        image: thomaspoignant/hello-world-rest-json
+        networks:
+          - name: "kong-net"
+        #command: ["postgres"]
+        #network_mode: bridge
+        exposed_ports:
+          - 8080
+        published_ports:
+          - 8080:8080
+        state: started
+        restart_policy: on-failure
+        restart_retries: 5
+
+    - name: Sleep 15
+      command: sleep 15
+
+    - name: Config hello-world service
+      shell: |
+          curl -i -X POST \
+            --url http://localhost:8001/services/ \
+            --data 'name=helloworld' \
+            --data 'url=http://{{ ansible_default_ipv4.address }}:8080'
+
+    - name: Config hello-world route
+      shell: |
+          curl -X POST \
+            http://localhost:8001/services/helloworld/routes \
+             -H 'Content-Type: application/json' \
+             -d '{"hosts":["test.helloworld"]}'
+
+    #- name: Sleep 5
+    #  command: sleep 5
+
+    - name: Get hello-world with kong
+      shell: |
+          curl -i -X GET \
+            --url http://localhost:8000/ \
+            --header 'Host: test.helloworld'
+  
