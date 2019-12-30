@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "Hola Mundo!"
+echo "Iniciando y desplegando ejercicio DevOps"
 terraform init
+terraform apply -auto-approve
