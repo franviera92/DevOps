@@ -86,7 +86,7 @@ resource "aws_instance" "devops" {
     destination = "/tmp/docker-install.yml"
   }
   provisioner "remote-exec" {
-    inline = ["ansible-playbook -u root --private-key ./devops.pem -i localhost -vv /home/ubuntu/docker/docker-install.yml" ]
+    inline = ["ansible-playbook -i localhost -vv /home/ubuntu/docker/docker-install.yml" ]
   }
   
 }
