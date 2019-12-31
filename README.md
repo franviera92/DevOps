@@ -72,4 +72,15 @@ Debera ver un mensaje similar al siguiente:
 
  https://www.laptopmag.com/articles/use-bash-shell-windows-10
 
+
+ # Resolver los siguientes challenge
+
+    - docker container run -it --rm bennu/jobs:sh    (RESUELTO)
+
+    Este contenedor exitia un problema donde ejecutaba el bucle while para el file message en un subbash
+
+    En la consola podra verificar con el State del contenedor bennu-jobs-sh en el TASK Print information about container
+
+    - docker container run -it --rm bennu/jobs:missing 
+
  
