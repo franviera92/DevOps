@@ -12,7 +12,9 @@ ENTRYPOINT ["/opt/jobs/sh/entrypoint.sh"]
 
 # cd /home/ubuntu/bennu_jobs_sh
 #  build -t bennu_jobs_sh .
-# docker run -it -d bennu1
+# docker run -it -d bennu_jobs_sh
+
+#docker run -it --entrypoint "/bin/bash" bennu/jobs:sh
 
 
 

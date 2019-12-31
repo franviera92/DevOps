@@ -75,12 +75,14 @@ Debera ver un mensaje similar al siguiente:
 
  # Resolver los siguientes challenge
 
-    - docker container run -it --rm bennu/jobs:sh    (RESUELTO)
+    - docker container run -it --rm bennu/jobs:sh       (RESUELTO)
 
     En este contenedor existia un problema donde ejecutaba el bucle while para el file message en un subbash
 
     En la consola podra verificar con el State ExitCode (0) del contenedor bennu-jobs-sh en el TASK Print information about container el cual indica que el contenedor se ha creado, ejecutado y finalizado correctamente.
 
-    - docker container run -it --rm bennu/jobs:missing 
+    - docker container run -it --rm bennu/jobs:missing      (RESUELTO)
+
+    En este ultimo contenedor no existia el siguiente directorio /usr/local/bin/missing
 
  

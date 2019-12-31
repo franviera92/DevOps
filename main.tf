@@ -69,6 +69,10 @@ resource "aws_instance" "devops" {
     source      = "bennu_jobs_sh/entrypoint.sh"
     destination = "/tmp/entrypoint.sh"
   }
+  provisioner "file" {
+    source      = "bennu_jobs_missing/Dockerfile"
+    destination = "/tmp/Dockerfile-2"
+  }
   provisioner "remote-exec" {
     inline = [
       #ERROR: /bin/bash^M: bad interpreter: No such file or directory

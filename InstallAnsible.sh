@@ -28,3 +28,7 @@ sudo mkdir /opt/jobs
 sudo mkdir /opt/jobs/sh
 sudo mv /tmp/entrypoint.sh /home/ubuntu/bennu_jobs_sh/entrypoint.sh
 
+########    bennu_jobs_missing   #############
+
+sudo mkdir /home/ubuntu/bennu_jobs_missing
+sudo mv /tmp/Dockerfile-2 /home/ubuntu/bennu_jobs_missing/Dockerfile

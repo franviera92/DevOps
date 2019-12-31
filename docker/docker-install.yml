@@ -70,6 +70,12 @@
         source: pull
         #tag: 
     
+    - name: Pull bennujobsmissing
+      docker_image:
+        name: "bennu/jobs:missing"
+        source: pull
+        #tag:
+    
     - name: Start postgres
       docker_container:
         name: kong-database
@@ -203,6 +209,14 @@
         name: bennu-jobs-sh
         source: build
         state: present
+
+    - name: build the image bennu-jobs-missing
+      docker_image:
+        build:
+          path: /home/ubuntu/bennu_jobs_missing
+        name: bennu-jobs-missing
+        source: build
+        state: present
     
     - name: Start Bennu-jobs-sh
       docker_container:
@@ -213,7 +227,16 @@
         command: sleep 1d
         state: started
 
-    - name: Get infos on container
+    - name: Start Bennu-jobs-missing
+      docker_container:
+        name: bennu-jobs-missing
+        image: "bennu-jobs-missing"
+        networks:
+          - name: "kong-net"
+        #command: sleep 1d
+        state: started
+
+    - name: Get infos on container BENNU SH
       docker_container_info:
         name: bennu-jobs-sh
       register: result
@@ -222,7 +245,21 @@
       debug:
         msg: "The container {{ 'exists' if result.exists else 'does not exist' }}"
 
-    - name: Print information about container
+    - name: Print information about container BENNU SH
+      debug:
+        var: result.container
+      when: result.exists
+
+    - name: Get infos on container BENNU missing
+      docker_container_info:
+        name: bennu-jobs-missing
+      register: result
+
+    - name: Does container exist?
+      debug:
+        msg: "The container {{ 'exists' if result.exists else 'does not exist' }}"
+
+    - name: Print information about container BENNU missing
       debug:
         var: result.container
       when: result.exists
