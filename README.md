@@ -1,7 +1,7 @@
 # DevOps
 Ejercicio DevOps sobre un free tier de AWS 
 
-En el presente ejercicio se estara haciendo mendiante un script el despligue de una instancia free tier en AWS donde a su vez se instalara Ansible y que este ultimo hara la instalacion y despligue de Docker y dos contenedores que estaran conectado entre si para obtener un resultdo esperado como lo es una llamada a un helloworld, estos dos contenedores estan conformado por un contenedor de Kong api gateway y otro contenedor con que retorna un helloword, el fin de este ejercicio que registrar un servicio en kong que retorne el helloworld del segundo contenedor, sin mas que decir los paso para ejecutar el ejercicio acontinuacion:
+En el presente ejercicio se estara haciendo mendiante un script el despligue de una instancia free tier en AWS con Terraform donde a su vez se instalara Ansible y que este ultimo hara la instalacion y despligue de Docker y dos contenedores que estaran conectado entre si para obtener un resultado esperado como lo es una llamada a un helloworld, estos dos contenedores estan conformado por un contenedor de Kong api gateway y otro contenedor con que retorna un helloword, el fin de este ejercicio es registrar un servicio en kong que retorne el helloworld del segundo contenedor, sin mas que decir los paso para ejecutar el ejercicio acontinuacion:
 
 Pasos para desplegar ejercicio devops
 
@@ -31,7 +31,7 @@ Pasos para desplegar ejercicio devops
 
 5. Creacion del Key Pair 
 
-    En el siguiente paso debemos crear nuestro Key Pairs en el panel de EC2 con el fin de obtener la llave  privada el cual necesitaremos para que terraform pueda conectarse por SSH la instacia creada y pueda asi     ejecutar con exito los provisioners configurados en nuestro archivo main.tf de Terraform.
+    En el siguiente paso debemos crear nuestro Key Pairs en el panel de EC2 con el fin de obtener la llave  privada el cual necesitaremos para que terraform pueda conectarse por SSH la instacia creada y pueda asi  ejecutar con exito los provisioners configurados en nuestro archivo main.tf de Terraform.
 
     Url para la creacion del Key Pairs:  https://console.aws.amazon.com/ec2/home?region=us-east-1#KeyPairs:sort=keyName
 
@@ -77,9 +77,9 @@ Debera ver un mensaje similar al siguiente:
 
     - docker container run -it --rm bennu/jobs:sh    (RESUELTO)
 
-    Este contenedor exitia un problema donde ejecutaba el bucle while para el file message en un subbash
+    En este contenedor existia un problema donde ejecutaba el bucle while para el file message en un subbash
 
-    En la consola podra verificar con el State Exit (0) del contenedor bennu-jobs-sh en el TASK Print information about container el cual indica que el contenedor se ha creado, ejecutado y finalizado correctamente.
+    En la consola podra verificar con el State ExitCode (0) del contenedor bennu-jobs-sh en el TASK Print information about container el cual indica que el contenedor se ha creado, ejecutado y finalizado correctamente.
 
     - docker container run -it --rm bennu/jobs:missing 
 
