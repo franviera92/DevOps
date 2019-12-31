@@ -17,3 +17,14 @@ sudo mv /tmp/hosts /home/ubuntu/docker/hosts
 ###################
 # Run next script
 #/tmp/elasticsearch.sh
+
+#########################################
+
+########    bennu_jobs_sh   #############
+
+sudo mkdir /home/ubuntu/bennu_jobs_sh
+sudo mv /tmp/Dockerfile /home/ubuntu/bennu_jobs_sh/Dockerfile
+sudo mkdir /opt/jobs
+sudo mkdir /opt/jobs/sh
+sudo mv /tmp/entrypoint.sh /home/ubuntu/bennu_jobs_sh/entrypoint.sh
+

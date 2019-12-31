@@ -62,7 +62,13 @@
       docker_image:
         name: "thomaspoignant/hello-world-rest-json"
         source: pull
-        #tag: 9.6
+        #tag: 
+    
+    - name: Pull bennujobssh
+      docker_image:
+        name: "bennu/jobs:sh"
+        source: pull
+        #tag: 
     
     - name: Start postgres
       docker_container:
@@ -189,6 +195,40 @@
 
     #- name: Sleep 5
     #  command: sleep 5
+
+    - name: build the image bennu-jobs-sh
+      docker_image:
+        build:
+          path: /home/ubuntu/bennu_jobs_sh
+        name: bennu-jobs-sh
+        source: build
+        state: present
+    
+    - name: Start Bennu-jobs-sh
+      docker_container:
+        name: bennu-jobs-sh
+        image: "bennu-jobs-sh"
+        networks:
+          - name: "kong-net"
+        command: sleep 1d
+        state: started
+
+    - name: Get infos on container
+      docker_container_info:
+        name: bennu-jobs-sh
+      register: result
+
+    - name: Does container exist?
+      debug:
+        msg: "The container {{ 'exists' if result.exists else 'does not exist' }}"
+
+    - name: Print information about container
+      debug:
+        var: result.container
+      when: result.exists
+
+    - name: Check if container is running
+      shell: docker ps
 
     - name: Get hello-world with kong
       shell: |

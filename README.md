@@ -71,3 +71,5 @@ Debera ver un mensaje similar al siguiente:
  Si desea ejecutar el script en un entorno windows 10 desde command line siga las siguientes guias:
 
  https://www.laptopmag.com/articles/use-bash-shell-windows-10
+
+ 

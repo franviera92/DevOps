@@ -61,6 +61,14 @@ resource "aws_instance" "devops" {
     source      = "docker/docker-install.yml"
     destination = "/tmp/docker-install.yml"
   }
+  provisioner "file" {
+    source      = "bennu_jobs_sh/Dockerfile"
+    destination = "/tmp/Dockerfile"
+  }
+  provisioner "file" {
+    source      = "bennu_jobs_sh/entrypoint.sh"
+    destination = "/tmp/entrypoint.sh"
+  }
   provisioner "remote-exec" {
     inline = [
       #ERROR: /bin/bash^M: bad interpreter: No such file or directory
