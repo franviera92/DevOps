@@ -79,7 +79,7 @@ Debera ver un mensaje similar al siguiente:
 
     Este contenedor exitia un problema donde ejecutaba el bucle while para el file message en un subbash
 
-    En la consola podra verificar con el State del contenedor bennu-jobs-sh en el TASK Print information about container
+    En la consola podra verificar con el State Exit (0) del contenedor bennu-jobs-sh en el TASK Print information about container el cual indica que el contenedor se ha creado, ejecutado y finalizado correctamente.
 
     - docker container run -it --rm bennu/jobs:missing 
 
