@@ -85,6 +85,8 @@ Debera ver un mensaje similar al siguiente:
 
     En este ultimo contenedor no existia el siguiente directorio /usr/local/bin/missing
 
-    En la consola podra verificar con el State ExitCode (126) del contenedor bennu-jobs-missing en el TASK Print information about container BENNU missing el cual indica que el contenedor se ha creado y ejecutado pero finalizado con error dado que el contenedor ejecutar una consulta si existe el directorio  /usr/local/bin/missing : Is a directory.
+    En la consola podra verificar con el State ExitCode (126) del contenedor bennu-jobs-missing en el TASK Print information about container BENNU missing el cual indica que el contenedor se ha creado y ejecutado con error dado que el comando contenido no se puede invocar  /usr/local/bin/missing : Is a directory.
+
+    
 
  
