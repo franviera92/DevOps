@@ -2,8 +2,8 @@
 provider "aws" {
   //version = "~> 2.0"
   region  = "us-east-1"
-  access_key = "AKIA2I4MNFLYSXVIOPVA"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 resource "aws_security_group" "public_sg" {
   name = "test_sg"
